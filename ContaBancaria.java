@@ -2,21 +2,28 @@ package entities;
 
 public class ContaBancaria {
 	private int numConta;
-	public String nome;
+	private String nome;
 	private double saldo;
 
-	public ContaBancaria(){
-		
-	}
 	
-	public ContaBancaria(int numConta, String nome,double saldo) {
+	public ContaBancaria(int numConta, String nome) {
 		this.numConta = numConta;
 		this.nome = nome;
-		this.saldo = saldo;
+	}
+
+	public ContaBancaria(int numConta, String nome,double depositoInicial) {
+		this.numConta = numConta;
+		this.nome = nome;
+		deposito(depositoInicial);
+	}	
+	
+	
+	public String getNome() {
+		return nome;
 	}
 	
-	public void setNumConta(int numConta) {
-		this.numConta = numConta;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 	public int getNumConta() {
@@ -25,21 +32,25 @@ public class ContaBancaria {
 	
 	public void deposito(double valorDepositado) {
 		
-		saldo =  saldo + valorDepositado;	
+		saldo += valorDepositado;	
 		
 	}
 	
 	public void saque(double valorRetirado) {
-		saldo = (saldo - 5.00) - valorRetirado;
+		saldo -= valorRetirado + 5.0;
 		
 	}
 
 	public double getSaldo() {
 		return saldo;
+	}			
+	
+	public String toString() {
+		return "Conta: "
+				+ numConta
+				+", Titular: "
+				+ nome
+				+ ", Saldo: $"
+				+ String.format("%.2f", saldo);
 	}
-
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-					
 }
