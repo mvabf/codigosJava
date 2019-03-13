@@ -12,51 +12,47 @@ public class Banco {
 		Locale.setDefault(Locale.US);
 		Scanner in = new Scanner(System.in);
 		
+		ContaBancaria conta;
 		System.out.println("########################");
 		System.out.println("BEM VINDO AO NOSSO BANCO");
 		System.out.println("########################");
 		
 		System.out.print("Digite Número de Conta: ");
 		int numConta = in.nextInt();
-		
-		
+		in.nextLine();
 		System.out.print("Nome do Titular da Conta: ");
-		String nome = in.next();
+		String nome = in.nextLine();
 		
 		System.out.print("Já foi inserido algum valor inicial (y/n) ? ");
 		char op = in.next().charAt(0);
 		
-		double saldo;
 		if(op == 'y') {
 			System.out.print("Insira valor do depósito inicial: ");
-			 saldo = in.nextDouble();
+			double depositoInicial = in.nextDouble();
+			conta = new ContaBancaria(numConta, nome, depositoInicial);
 		}
 		else {
-			 saldo = 0.00;
+			 conta = new ContaBancaria(numConta, nome);
 		}
 		
-		ContaBancaria conta = new ContaBancaria(numConta,nome,saldo);
-		conta.setNumConta(numConta);
-		
 		System.out.println("Dados da conta: ");
-		System.out.printf("Conta: %d, Titular: %s, Saldo: $ %.2f",conta.getNumConta(),conta.nome,conta.getSaldo());
+		System.out.println(conta);
 		
 		System.out.println();
-		System.out.println("Entre com um depósito: ");
+		System.out.print("Entre com um depósito: ");
 		double valorDepositado = in.nextDouble();
 		conta.deposito(valorDepositado);
 		
 		System.out.println("Dados Atualizados: ");
-		System.out.printf("Conta: %d, Titular: %s, Saldo: $ %.2f",conta.getNumConta(),conta.nome,conta.getSaldo());
-		
+		System.out.println(conta);
 		
 		System.out.println();
-		System.out.println("Entre com um Saque: ");
+		System.out.print("Entre com um Saque: ");
 		double valorRetirado = in.nextDouble();
 		conta.saque(valorRetirado);
 		
 		System.out.println("Dados Atualizados: ");
-		System.out.printf("Conta: %d, Titular: %s, Saldo: $ %.2f",conta.getNumConta(),conta.nome,conta.getSaldo());
+		System.out.println(conta);
 		
 		in.close();
 	}
